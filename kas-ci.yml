@@ -1,0 +1,11 @@
+# this file is appended to CI/CD builds
+
+header:
+  version: 9
+
+local_conf_header:
+  downloads: |
+    DL_DIR = "${TOPDIR}/dl_dir"
+
+  sstate: |
+    SSTATE_DIR = "${TOPDIR}/sstate_dir"

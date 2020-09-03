@@ -1,0 +1,106 @@
+header:
+  version: 9
+
+distro: "poky-iris"
+
+target:
+  - multiconfig:sc573-ezkit:irma-six-dev
+  - multiconfig:sc572-gen6:irma-six-dev
+  - multiconfig:sc573-gen6:irma-six-dev
+  - multiconfig:sc573-gen6-4dvein:irma-six-dev
+  - multiconfig:sc573-ezkit:irma-six-maintenance
+  - multiconfig:sc572-gen6:irma-six-maintenance
+  - multiconfig:sc573-gen6:irma-six-maintenance
+  - multiconfig:sc573-gen6-4dvein:irma-six-maintenance
+  - multiconfig:sc573-ezkit:irma-six-deploy
+  - multiconfig:sc572-gen6:irma-six-deploy
+  - multiconfig:sc573-gen6:irma-six-deploy
+  - multiconfig:sc573-gen6-4dvein:irma-six-deploy
+
+repos:
+  poky:
+    url: "git://git.yoctoproject.org/poky.git"
+    refspec: "d20ef1f5a5de7820b3e9b7f539b51f94954e9cd5"
+    layers:
+      meta:
+      meta-poky:
+  meta-oe:
+    url: "git://git.openembedded.org/meta-openembedded"
+    refspec: "346681e7bf9c78008a845fc89031be4fd4ceb3a1"
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+  meta-ros: # provides yaml-cpp
+    url: "https://github.com/ros/meta-ros.git"
+    refspec: "e0a126b49a38923a4f47e804aef5e0b56da2c902"
+    layers:
+      meta-ros-backports-gatesgarth:
+      meta-ros-common:
+  meta-java:
+    url: "https://git.yoctoproject.org/git/meta-java"
+    refspec: "dunfell"
+  meta-clang:
+    url: "https://github.com/kraj/meta-clang.git"
+    refspec: "dunfell"
+  lnxdsp-adi-meta:
+    url: "https://github.com/analogdevicesinc/lnxdsp-adi-meta.git"
+    refspec: "release/yocto-1.0.0"
+    layers:
+      meta-adi-adsp-sc5xx:
+      meta-adi-external-toolchain:
+  meta-iris:
+    url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
+    refspec: "develop"
+
+bblayers_conf_header:
+  standard: |
+    POKY_BBLAYERS_CONF_VERSION = "2"
+    BBPATH = "${TOPDIR}"
+    BBFILES ?= ""
+
+local_conf_header:
+  standard: |
+    CONF_VERSION = "1"
+
+  ignore-adi-packages:
+    BBMASK += "\\
+      meta-adi-adsp-sc5xx/recipes-benchmark \\
+      meta-adi-adsp-sc5xx/recipes-bsp/alsa-state \\
+      meta-adi-adsp-sc5xx/recipes-connectivity \\
+      meta-adi-adsp-sc5xx/recipes-core \\
+      meta-adi-adsp-sc5xx/recipes-devtools \\
+      meta-adi-adsp-sc5xx/recipes-extended \\
+      meta-adi-adsp-sc5xx/recipes-icc \\
+      meta-adi-adsp-sc5xx/recipes-multimedia \\
+      meta-adi-adsp-sc5xx/recipes-support"
+
+  package_ipk: |
+    PACKAGE_CLASSES ?= "package_ipk"
+
+  image_features: |
+    EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
+    USER_CLASSES ?= "buildstats image-mklibs image-prelink"
+
+  qemu_conf: |
+    PACKAGECONFIG_append_pn-qemu-native = " sdl"
+    PACKAGECONFIG_append_pn-nativesdk-qemu = " sdl"
+
+  buildhistory: |
+    INHERIT += "buildhistory"
+    BUILDHISTORY_COMMIT = "1"
+
+  diskmon: |
+    BB_DISKMON_DIRS = "\
+      STOPTASKS,${TMPDIR},1G,100K \
+      STOPTASKS,${DL_DIR},1G,100K \
+      STOPTASKS,${SSTATE_DIR},1G,100K \
+      STOPTASKS,/tmp,100M,100K \
+      ABORT,${TMPDIR},100M,1K \
+      ABORT,${DL_DIR},100M,1K \
+      ABORT,${SSTATE_DIR},100M,1K \
+      ABORT,/tmp,10M,1K"
+
+  preferred_providers: |
+    PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
+    PREFERRED_PROVIDER_virtual/java-native = "cacao-native"
