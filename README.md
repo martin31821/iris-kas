@@ -6,7 +6,7 @@ It enables easier management, minimises build setup steps and repository managem
 
 ## How does it work?
 The file `kas-irma6.yml` is the main configuration file and describes how KAS should prepare our build environment. It is also used to generate various config files, such as yocto's `local.conf`.
-The files `kas-ci.yml` and `kas-irma6.yml` contain build environment specific configurations, e.g. where caches are saved.
+The file `kas-developer.yml` contains build environment specific configurations, e.g. where caches are saved.
 
 For a detailed documentation, please visit [https://kas.readthedocs.io/en/latest/](https://kas.readthedocs.io/en/latest/)
 
