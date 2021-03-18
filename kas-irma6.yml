@@ -84,6 +84,8 @@ bblayers_conf_header:
 local_conf_header:
   standard: |
     CONF_VERSION = "1"
+  accept_eulas: |
+    ACCEPT_FSL_EULA = "1"
 
   ignore-adi-packages:
     BBMASK += "\\
