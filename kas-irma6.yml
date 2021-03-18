@@ -16,8 +16,13 @@ target:
   - multiconfig:sc572-gen6:irma-six-deploy
   - multiconfig:sc573-gen6:irma-six-deploy
   - multiconfig:sc573-gen6-4dvein:irma-six-deploy
+  - multiconfig:imx8mp-gen6:irma-six-deploy
+  - multiconfig:imx8mp-gen6:irma-six-dev
+  - multiconfig:imx8mp-gen6:irma-six-maintenance
 
 repos:
+  
+  # general repos
   poky:
     url: "git://git.yoctoproject.org/poky.git"
     refspec: "d20ef1f5a5de7820b3e9b7f539b51f94954e9cd5"
@@ -37,21 +42,38 @@ repos:
     layers:
       meta-ros-backports-gatesgarth:
       meta-ros-common:
+
+  # repos relevant for testing
   meta-java:
     url: "https://git.yoctoproject.org/git/meta-java"
     refspec: "dunfell"
   meta-clang:
     url: "https://github.com/kraj/meta-clang.git"
     refspec: "dunfell"
+  
+  # irma6 HWv1 repos
   lnxdsp-adi-meta:
     url: "https://github.com/analogdevicesinc/lnxdsp-adi-meta.git"
     refspec: "release/yocto-1.0.0"
     layers:
       meta-adi-adsp-sc5xx:
       meta-adi-external-toolchain:
+
+  # irma6 HWv2 repos
+  meta-freescale:
+    url: "https://github.com/Freescale/meta-freescale.git"
+    refspec: "dunfell"
+  meta-freescale-3rdparty:
+    url: "https://github.com/Freescale/meta-freescale-3rdparty"
+    refspec: "dunfell"
+  meta-freescale-distro:
+    url: "https://github.com/Freescale/meta-freescale-distro"
+    refspec: "dunfell"
+
+  # iris-specific repos
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
-    refspec: "develop"
+    refspec: "feature/jaor/RDPHOEN-24_get_nxp_evalkit_working"
 
 bblayers_conf_header:
   standard: |
