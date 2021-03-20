@@ -16,9 +16,9 @@ target:
   - multiconfig:sc572-gen6:irma-six-deploy
   - multiconfig:sc573-gen6:irma-six-deploy
   - multiconfig:sc573-gen6-4dvein:irma-six-deploy
-  - multiconfig:imx8mp-gen6:irma-six-deploy
-  - multiconfig:imx8mp-gen6:irma-six-dev
-  - multiconfig:imx8mp-gen6:irma-six-maintenance
+  - multiconfig:imx8mp-evk:irma-six-deploy
+  - multiconfig:imx8mp-evk:irma-six-dev
+  - multiconfig:imx8mp-evk:irma-six-maintenance
 
 repos:
   
