@@ -73,7 +73,7 @@ repos:
   # iris-specific repos
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
-    refspec: "feature/jaor/RDPHOEN-24_get_nxp_evalkit_working"
+    refspec: "feature/jaor/update_dunfell"
 
 bblayers_conf_header:
   standard: |
