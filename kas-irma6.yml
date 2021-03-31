@@ -36,6 +36,7 @@ repos:
       meta-oe:
       meta-python:
       meta-networking:
+      meta-webserver:
   meta-ros: # provides yaml-cpp
     url: "https://github.com/ros/meta-ros.git"
     refspec: "e0a126b49a38923a4f47e804aef5e0b56da2c902"
@@ -73,7 +74,7 @@ repos:
   # iris-specific repos
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
-    refspec: "feature/jaor/update_dunfell"
+    refspec: "feature/ersc/imx8mp-evk_with_addi90xx_camera"
 
 bblayers_conf_header:
   standard: |
