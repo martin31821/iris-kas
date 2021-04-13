@@ -87,17 +87,9 @@ local_conf_header:
   accept_eulas: |
     ACCEPT_FSL_EULA = "1"
 
-  ignore-adi-packages:
-    BBMASK += "\\
-      meta-adi-adsp-sc5xx/recipes-benchmark \\
-      meta-adi-adsp-sc5xx/recipes-bsp/alsa-state \\
-      meta-adi-adsp-sc5xx/recipes-connectivity \\
-      meta-adi-adsp-sc5xx/recipes-core \\
-      meta-adi-adsp-sc5xx/recipes-devtools \\
-      meta-adi-adsp-sc5xx/recipes-extended \\
-      meta-adi-adsp-sc5xx/recipes-icc \\
-      meta-adi-adsp-sc5xx/recipes-multimedia \\
-      meta-adi-adsp-sc5xx/recipes-support"
+  # we only want to cherry-pick u-boot and kernel recipes from the adi upstream. ignore everything else
+  ignore-adi-packages: |
+    BBMASK += "meta-adi-adsp-sc5xx\/(?!(recipes-bsp\/u-boot)|(recipes-kernel\/linux)|(recipes-kernel\/linux-firmware)).+\/.+"
 
   package_ipk: |
     PACKAGE_CLASSES ?= "package_ipk"
