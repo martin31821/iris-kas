@@ -73,7 +73,7 @@ repos:
   # iris-specific repos
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
-    refspec: "feature/jaor/update_dunfell"
+    refspec: "develop"
 
 bblayers_conf_header:
   standard: |
