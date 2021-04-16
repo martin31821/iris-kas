@@ -2,7 +2,7 @@ version: '3'
 
 services:
   kas:
-    image: kasproject/kas:2.2
+    image: ghcr.io/siemens/kas/kas:2.4
     working_dir: /mnt/yocto-kas
     environment:
       - USER_ID
