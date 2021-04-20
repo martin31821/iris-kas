@@ -103,8 +103,9 @@ local_conf_header:
     PACKAGECONFIG_append_pn-nativesdk-qemu = " sdl"
 
   buildhistory: |
-    INHERIT += "buildhistory"
-    BUILDHISTORY_COMMIT = "1"
+    # disable buildhistory until we have a PR service
+    # INHERIT += "buildhistory"
+    # BUILDHISTORY_COMMIT = "1"
 
   diskmon: |
     BB_DISKMON_DIRS = "\
