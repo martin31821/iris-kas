@@ -74,8 +74,12 @@ bblayers_conf_header:
 local_conf_header:
   standard: |
     CONF_VERSION = "1"
+
   accept_eulas: |
     ACCEPT_FSL_EULA = "1"
+
+  cve_scanning:
+    INHERIT += "cve-check"
 
   # we only want to cherry-pick u-boot and kernel recipes from the adi upstream. ignore everything else
   ignore-adi-packages: |
