@@ -63,7 +63,7 @@ repos:
   # iris-specific repos
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
-    refspec: "develop"
+    refspec: "feature/tno/hdf5"
 
 bblayers_conf_header:
   standard: |
