@@ -4,21 +4,11 @@ header:
 distro: "poky-iris"
 
 target:
-  - multiconfig:sc573-ezkit:irma-six-dev
-  - multiconfig:sc572-gen6:irma-six-dev
-  - multiconfig:sc573-gen6:irma-six-dev
-  - multiconfig:sc573-gen6-4dvein:irma-six-dev
-  - multiconfig:sc573-ezkit:irma-six-maintenance
-  - multiconfig:sc572-gen6:irma-six-maintenance
-  - multiconfig:sc573-gen6:irma-six-maintenance
-  - multiconfig:sc573-gen6-4dvein:irma-six-maintenance
-  - multiconfig:sc573-ezkit:irma-six-deploy
-  - multiconfig:sc572-gen6:irma-six-deploy
-  - multiconfig:sc573-gen6:irma-six-deploy
-  - multiconfig:sc573-gen6-4dvein:irma-six-deploy
-  - multiconfig:imx8mp-evk:irma-six-deploy
-  - multiconfig:imx8mp-evk:irma-six-dev
-  - multiconfig:imx8mp-evk:irma-six-maintenance
+  - multiconfig:sc572-gen6
+  - multiconfig:sc573-ezkit
+  - multiconfig:sc573-gen6
+  - multiconfig:sc573-gen6-4dvein
+  - multiconfig:imx8mp-evk
 
 repos:
   
