@@ -11,10 +11,21 @@ The file `kas-developer.yml` contains build environment specific configurations,
 For a detailed documentation, please visit [https://kas.readthedocs.io/en/latest/](https://kas.readthedocs.io/en/latest/)
 
 
-### Example usages
+## Example usages
+
+### using native KAS installation
 
 #### building the current gen6 deploy firmware for the ADI sharc using the developer specific config
 `kas shell -c "bitbake mc:sc573-gen6:irma-six-deploy" kas-irma6.yml:kas-developer.yml`
 
 #### building all the gen6 firmwares for the ADI sharc
 `kas shell -c "bitbake mc:sc573-gen6:irma-six-maintenance mc:sc573-gen6:irma-six-dev mc:sc573-gen6:irma-six-deploy" kas-irma6.yml:kas-developer.yml`
+
+
+### using Docker
+
+#### building the current gen6 deploy firmware for the ADI sharc using the developer specific config
+`USER_ID=$UID docker-compose run --rm kas shell -c "bitbake mc:sc573-gen6:irma-six-deploy" kas-irma6.yml:kas-developer.yml`
+
+#### building all the gen6 firmwares for the ADI sharc
+`USER_ID=$UID docker-compose run --rm kas shell -c "bitbake mc:sc573-gen6:irma-six-maintenance mc:sc573-gen6:irma-six-dev mc:sc573-gen6:irma-six-deploy" kas-irma6.yml:kas-developer.yml`
