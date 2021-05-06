@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  kas:
+    image: ghcr.io/siemens/kas/kas:2.4
+    working_dir: /mnt/yocto-kas
+    environment:
+      - USER_ID
+      - KAS_WORK_DIR=/mnt/yocto-kas
+      - KAS_BUILD_DIR=$${KAS_WORK_DIR}/build
+      - DL_DIR=$${TOPDIR}/dl_dir
+      - SSTATE_DIR=$${TOPDIR}/sstate_dir
+    volumes:
+      - ./:/mnt/yocto-kas
+      - ~/.ssh:/builder/.ssh

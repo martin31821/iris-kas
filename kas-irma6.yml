@@ -4,54 +4,66 @@ header:
 distro: "poky-iris"
 
 target:
-  - multiconfig:sc573-ezkit:irma-six-dev
-  - multiconfig:sc572-gen6:irma-six-dev
-  - multiconfig:sc573-gen6:irma-six-dev
-  - multiconfig:sc573-gen6-4dvein:irma-six-dev
-  - multiconfig:sc573-ezkit:irma-six-maintenance
-  - multiconfig:sc572-gen6:irma-six-maintenance
-  - multiconfig:sc573-gen6:irma-six-maintenance
-  - multiconfig:sc573-gen6-4dvein:irma-six-maintenance
-  - multiconfig:sc573-ezkit:irma-six-deploy
-  - multiconfig:sc572-gen6:irma-six-deploy
-  - multiconfig:sc573-gen6:irma-six-deploy
-  - multiconfig:sc573-gen6-4dvein:irma-six-deploy
+  - multiconfig:sc572-gen6
+  - multiconfig:sc573-ezkit
+  - multiconfig:sc573-gen6
+  - multiconfig:sc573-gen6-4dvein
+  - multiconfig:imx8mp-evk
 
 repos:
+  
+  # general repos
   poky:
     url: "git://git.yoctoproject.org/poky.git"
-    refspec: "d20ef1f5a5de7820b3e9b7f539b51f94954e9cd5"
+    refspec: "945b4ef084cb254643b425748d5e38c4f5908a9a" # dunfell
     layers:
       meta:
       meta-poky:
   meta-oe:
     url: "git://git.openembedded.org/meta-openembedded"
-    refspec: "346681e7bf9c78008a845fc89031be4fd4ceb3a1"
+    refspec: "c1a50683225b0bf10f8d7a18280acefa7469ecc2" # dunfell
     layers:
       meta-oe:
       meta-python:
       meta-networking:
   meta-ros: # provides yaml-cpp
     url: "https://github.com/ros/meta-ros.git"
-    refspec: "e0a126b49a38923a4f47e804aef5e0b56da2c902"
+    refspec: "4814c315c98b9a744cf0405475eba7a27950779b" # dunfell
     layers:
       meta-ros-backports-gatesgarth:
       meta-ros-common:
+
+  # repos relevant for testing
   meta-java:
     url: "https://git.yoctoproject.org/git/meta-java"
     refspec: "dunfell"
   meta-clang:
     url: "https://github.com/kraj/meta-clang.git"
     refspec: "dunfell"
+  
+  # irma6 HWv1 repos
   lnxdsp-adi-meta:
     url: "https://github.com/analogdevicesinc/lnxdsp-adi-meta.git"
-    refspec: "release/yocto-1.0.0"
+    refspec: "ad2203c11723b07727589a8eebe33f3129cc236a" # release/yocto-1.0.0
     layers:
       meta-adi-adsp-sc5xx:
       meta-adi-external-toolchain:
+
+  # irma6 HWv2 repos
+  meta-freescale:
+    url: "https://github.com/Freescale/meta-freescale.git"
+    refspec: "dunfell"
+  meta-freescale-3rdparty:
+    url: "https://github.com/Freescale/meta-freescale-3rdparty"
+    refspec: "dunfell"
+  meta-freescale-distro:
+    url: "https://github.com/Freescale/meta-freescale-distro"
+    refspec: "dunfell"
+
+  # iris-specific repos
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
-    refspec: "develop"
+    refspec: "0ec8f9d460979d4d9b2a9790cc197f692e5d52f5" # 1.1.24
 
 bblayers_conf_header:
   standard: |
@@ -63,17 +75,15 @@ local_conf_header:
   standard: |
     CONF_VERSION = "1"
 
-  ignore-adi-packages:
-    BBMASK += "\\
-      meta-adi-adsp-sc5xx/recipes-benchmark \\
-      meta-adi-adsp-sc5xx/recipes-bsp/alsa-state \\
-      meta-adi-adsp-sc5xx/recipes-connectivity \\
-      meta-adi-adsp-sc5xx/recipes-core \\
-      meta-adi-adsp-sc5xx/recipes-devtools \\
-      meta-adi-adsp-sc5xx/recipes-extended \\
-      meta-adi-adsp-sc5xx/recipes-icc \\
-      meta-adi-adsp-sc5xx/recipes-multimedia \\
-      meta-adi-adsp-sc5xx/recipes-support"
+  accept_eulas: |
+    ACCEPT_FSL_EULA = "1"
+
+  cve_scanning:
+    INHERIT += "cve-check"
+
+  # we only want to cherry-pick u-boot and kernel recipes from the adi upstream. ignore everything else
+  ignore-adi-packages: |
+    BBMASK += "meta-adi-adsp-sc5xx\/(?!(recipes-bsp\/u-boot)|(recipes-kernel\/linux)|(recipes-kernel\/linux-firmware)).+\/.+"
 
   package_ipk: |
     PACKAGE_CLASSES ?= "package_ipk"
@@ -85,10 +95,6 @@ local_conf_header:
   qemu_conf: |
     PACKAGECONFIG_append_pn-qemu-native = " sdl"
     PACKAGECONFIG_append_pn-nativesdk-qemu = " sdl"
-
-  buildhistory: |
-    INHERIT += "buildhistory"
-    BUILDHISTORY_COMMIT = "1"
 
   diskmon: |
     BB_DISKMON_DIRS = "\
