@@ -63,7 +63,7 @@ repos:
   # iris-specific repos
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
-    refspec: "d8b9a9065eda57583a70d3b1de9984cda5fe83ba" # 1.1.24-RC1
+    refspec: "0ec8f9d460979d4d9b2a9790cc197f692e5d52f5" # 1.1.24
 
 bblayers_conf_header:
   standard: |
