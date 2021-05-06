@@ -15,20 +15,20 @@ repos:
   # general repos
   poky:
     url: "git://git.yoctoproject.org/poky.git"
-    refspec: "945b4ef084cb254643b425748d5e38c4f5908a9a" # dunfell
+    refspec: "dunfell"
     layers:
       meta:
       meta-poky:
   meta-oe:
     url: "git://git.openembedded.org/meta-openembedded"
-    refspec: "c1a50683225b0bf10f8d7a18280acefa7469ecc2" # dunfell
+    refspec: "dunfell"
     layers:
       meta-oe:
       meta-python:
       meta-networking:
   meta-ros: # provides yaml-cpp
     url: "https://github.com/ros/meta-ros.git"
-    refspec: "4814c315c98b9a744cf0405475eba7a27950779b" # dunfell
+    refspec: "dunfell"
     layers:
       meta-ros-backports-gatesgarth:
       meta-ros-common:
@@ -44,7 +44,7 @@ repos:
   # irma6 HWv1 repos
   lnxdsp-adi-meta:
     url: "https://github.com/analogdevicesinc/lnxdsp-adi-meta.git"
-    refspec: "ad2203c11723b07727589a8eebe33f3129cc236a" # release/yocto-1.0.0
+    refspec: "release/yocto-1.0.0"
     layers:
       meta-adi-adsp-sc5xx:
       meta-adi-external-toolchain:
@@ -63,7 +63,7 @@ repos:
   # iris-specific repos
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
-    refspec: "0ec8f9d460979d4d9b2a9790cc197f692e5d52f5" # 1.1.24
+    refspec: "develop"
 
 bblayers_conf_header:
   standard: |
