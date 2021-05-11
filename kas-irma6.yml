@@ -6,7 +6,7 @@ distro: "poky-iris"
 target:
 #  - multiconfig:sc572-gen6
 #  - multiconfig:sc573-ezkit
-#  - multiconfig:sc573-gen6
+  - multiconfig:sc573-gen6
 #  - multiconfig:sc573-gen6-4dvein
   - multiconfig:imx8mp-evk
 
@@ -63,7 +63,7 @@ repos:
   # iris-specific repos
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
-    refspec: "feature/tno/hdf5"
+    refspec: "feature/tno/hdf5_r1"
 
 bblayers_conf_header:
   standard: |
