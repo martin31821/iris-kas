@@ -78,6 +78,13 @@ local_conf_header:
   accept_eulas: |
     ACCEPT_FSL_EULA = "1"
 
+  license_compliance: |
+    INHERIT += "archiver"
+    ARCHIVER_MODE[src] = "original"
+    COPY_LIC_MANIFEST = "1"
+    COPY_LIC_DIRS = "1"
+    LICENSE_CREATE_PACKAGE = "1"
+
   cve_scanning:
     INHERIT += "cve-check"
 
