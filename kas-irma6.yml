@@ -61,8 +61,8 @@ repos:
     refspec: "dunfell"
 
   # iris-specific repos
-  meta-iris:
-    url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
+  meta-iris-base:
+    url: "https://github.com/iris-GmbH/meta-iris-base.git"
     refspec: "develop"
 
 bblayers_conf_header:
