@@ -18,10 +18,11 @@ For a detailed documentation, please visit [https://kas.readthedocs.io/en/latest
 
 #### Building the base Linux distribution for the ADI sharc
 As a IRIS customer you might be interested in building our base Linux distribution, which is configured for running our proprietary platform application (not included). This can be done by running the following:
+
 `kas shell -c "bitbake mc:sc573-gen6:irma-six-base" kas-irma6.yml`
 
 #### Building the current gen6 deploy firmware for the ADI sharc using the developer specific config
-`kas shell -c "bitbake mc:sc573-gen6:irma-six-deploy" kas-irma6.yml:kas-irma6-pa.yml::kas-developer.yml`
+`kas shell -c "bitbake mc:sc573-gen6:irma-six-deploy" kas-irma6.yml:kas-irma6-pa.yml:kas-developer.yml`
 
 #### Building all the gen6 firmwares for the ADI sharc
 `kas shell -c "bitbake mc:sc573-gen6:irma-six-maintenance mc:sc573-gen6:irma-six-dev mc:sc573-gen6:irma-six-deploy" kas-irma6.yml:kas-irma6-pa.yml:kas-developer.yml`
