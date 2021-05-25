@@ -66,7 +66,7 @@ repos:
   # iris-specific repos
   meta-iris-base:
     url: "https://github.com/iris-GmbH/meta-iris-base.git"
-    refspec: "develop"
+    refspec: "feature/jaor/bump_linux_kernel"
 
 bblayers_conf_header:
   standard: |
