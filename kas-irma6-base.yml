@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: MIT
+# Copyright (C) 2021 iris GmbH infrared & intelligent sensors
+
 header:
   version: 9
 
@@ -61,8 +64,8 @@ repos:
     refspec: "dunfell"
 
   # iris-specific repos
-  meta-iris:
-    url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
+  meta-iris-base:
+    url: "https://github.com/iris-GmbH/meta-iris-base.git"
     refspec: "develop"
 
 bblayers_conf_header:
@@ -75,11 +78,19 @@ local_conf_header:
   standard: |
     CONF_VERSION = "1"
 
+  default_cache_dirs: |
+    DL_DIR ?= "${TOPDIR}/dl_dir"
+    SSTATE_DIR ?= "${TOPDIR}/sstate_dir"
+
   accept_eulas: |
     ACCEPT_FSL_EULA = "1"
 
-  cve_scanning:
+  cve_scanning: |
     INHERIT += "cve-check"
+
+  build_reproducibility: |
+    BB_GIT_SHALLOW = "1"
+    BB_GENERATE_SHALLOW_TARBALLS = "1"
 
   # we only want to cherry-pick u-boot and kernel recipes from the adi upstream. ignore everything else
   ignore-adi-packages: |

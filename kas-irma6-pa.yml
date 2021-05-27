@@ -1,0 +1,8 @@
+# this config adds the necessary layers for building the propriatary platform-application
+header:
+  version: 9
+
+repos:
+  meta-iris:
+    url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
+    refspec: "develop"

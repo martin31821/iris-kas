@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: MIT
+# Copyright (C) 2021 iris GmbH infrared & intelligent sensors
+
+header:
+  version: 9
+
+local_conf_header:
+  offline_build: |
+    SOURCE_MIRROR_URL ?= "file://${TOPDIR}/dl_dir"
+    INHERIT += "own-mirrors"
+    BB_NO_NETWORK = "1"
