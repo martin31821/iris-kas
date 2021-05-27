@@ -10,6 +10,7 @@ target:
   - multiconfig:sc573-gen6-4dvein
   - multiconfig:imx8mp-evk
 
+
 repos:
   
   # general repos
@@ -75,15 +76,19 @@ local_conf_header:
   standard: |
     CONF_VERSION = "1"
 
+  default_cache_dirs: |
+    DL_DIR ?= "${TOPDIR}/dl_dir"
+    SSTATE_DIR ?= "${TOPDIR}/sstate_dir"
+
   accept_eulas: |
     ACCEPT_FSL_EULA = "1"
 
-  license_compliance: |
-    INHERIT += "archiver"
-    ARCHIVER_MODE[src] = "original"
-
-  cve_scanning:
+  cve_scanning: |
     INHERIT += "cve-check"
+
+  build_reproducibility: |
+    BB_GIT_SHALLOW = "1"
+    BB_GENERATE_SHALLOW_TARBALLS = "1"
 
   # we only want to cherry-pick u-boot and kernel recipes from the adi upstream. ignore everything else
   ignore-adi-packages: |

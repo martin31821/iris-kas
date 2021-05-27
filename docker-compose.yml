@@ -8,8 +8,6 @@ services:
       - USER_ID
       - KAS_WORK_DIR=/mnt/yocto-kas
       - KAS_BUILD_DIR=$${KAS_WORK_DIR}/build
-      - DL_DIR=$${TOPDIR}/dl_dir
-      - SSTATE_DIR=$${TOPDIR}/sstate_dir
     volumes:
       - ./:/mnt/yocto-kas
       - ~/.ssh:/builder/.ssh
