@@ -16,20 +16,20 @@ repos:
   # general repos
   poky:
     url: "git://git.yoctoproject.org/poky.git"
-    refspec: "12725e44c1f6217f9d1b337e2d7c0094bd96017b"
+    refspec: "dunfell"
     layers:
       meta:
       meta-poky:
   meta-oe:
     url: "git://git.openembedded.org/meta-openembedded"
-    refspec: "7bd47ef6c98323c95a9e527129dca98c9a65ee08"
+    refspec: "dunfell"
     layers:
       meta-oe:
       meta-python:
       meta-networking:
   meta-ros: # provides yaml-cpp
     url: "https://github.com/ros/meta-ros.git"
-    refspec: "2f761ae70f51a5a2860bbbe93e3253395cdc800e"
+    refspec: "dunfell"
     layers:
       meta-ros-backports-gatesgarth:
       meta-ros-backports-hardknott:
@@ -38,15 +38,15 @@ repos:
   # repos relevant for testing
   meta-java:
     url: "https://git.yoctoproject.org/git/meta-java"
-    refspec: "6e84638d77ac921aac46649095bca5ddbde94d2a"
+    refspec: "dunfell"
   meta-clang:
     url: "https://github.com/kraj/meta-clang.git"
-    refspec: "e63d6f9abba5348e2183089d6ef5ea384d7ae8d8"
+    refspec: "dunfell"
   
   # irma6 HWv1 repos
   lnxdsp-adi-meta:
     url: "https://github.com/analogdevicesinc/lnxdsp-adi-meta.git"
-    refspec: "ad2203c11723b07727589a8eebe33f3129cc236a"
+    refspec: "release/yocto-1.0.0"
     layers:
       meta-adi-adsp-sc5xx:
       meta-adi-external-toolchain:
@@ -54,18 +54,18 @@ repos:
   # irma6 HWv2 repos
   meta-freescale:
     url: "https://github.com/Freescale/meta-freescale.git"
-    refspec: "0173d3f8d0cbf7844a4d23bc3fb30144abc914bb" #dunfell
+    refspec: "dunfell"
   meta-freescale-3rdparty:
     url: "https://github.com/Freescale/meta-freescale-3rdparty"
-    refspec: "a7b96dc91bb2818d8ed8210654db10d08d4d7890" #dunfell
+    refspec: "dunfell"
   meta-freescale-distro:
     url: "https://github.com/Freescale/meta-freescale-distro"
-    refspec: "5d882cdf079b3bde0bd9869ce3ca3db411acbf3b" #dunfell
+    refspec: "dunfell"
 
   # iris-specific repos
   meta-iris-base:
     url: "https://github.com/iris-GmbH/meta-iris-base.git"
-    refspec: "2.0.0"
+    refspec: "develop"
 
 bblayers_conf_header:
   standard: |
@@ -76,7 +76,7 @@ bblayers_conf_header:
 local_conf_header:
   standard: |
     CONF_VERSION = "1"
-    IRMA6_DISTRO_VERSION = "1.1.26"
+    IRMA6_DISTRO_VERSION = "1.1.27-dev"
 
   default_cache_dirs: |
     DL_DIR ?= "${TOPDIR}/dl_dir"
