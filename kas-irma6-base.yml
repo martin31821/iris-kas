@@ -66,7 +66,10 @@ repos:
   # iris-specific repos
   meta-iris-base:
     url: "https://github.com/iris-GmbH/meta-iris-base.git"
-    refspec: "develop"
+    refspec: "feature/jaor/update_seasocks"
+  meta-iris-thirdparty:
+    url: "git@github.com:iris-GmbH/meta-iris-thirdparty.git"
+    refspec: "feature/jaor/seasocks_recipe"
 
 bblayers_conf_header:
   standard: |
