@@ -1,5 +1,9 @@
 # iris-kas
 
+## Maintainers
+- Jasper Orschulko <Jasper [dot] Orschulko [att] iris-sensing.com>
+- Erik Schumacher <Erik [dot] Schumacher [att] iris-sensing.com>
+
 ## What is KAS?
 KAS is a bitbake wrapper developed and maintained by Siemens.
 It minimises build setup steps and repository management.
