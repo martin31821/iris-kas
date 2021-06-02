@@ -8,4 +8,4 @@ header:
 repos:
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
-    refspec: "develop"
+    refspec: "feature/jaor/update_dlib"
