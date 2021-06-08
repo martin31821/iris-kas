@@ -57,4 +57,4 @@ As an IRIS customer you might want to build the base Linux image belonging to a 
 ### Using Docker
 
 Make sure your setup meets the [docker prerequisites](#prerequisites), then simply prepend the desired command with the following:
-`USER_ID=$UID docker-compose run --rm `
+`docker-compose run --rm `
