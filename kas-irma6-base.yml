@@ -7,6 +7,7 @@ header:
 distro: "poky-iris"
 
 target:
+  - multiconfig:qemux86-64
   - multiconfig:sc573-gen6
   - multiconfig:imx8mp-evk
 
