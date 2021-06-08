@@ -10,8 +10,6 @@ services:
     environment:
       - USER_ID=${USER_ID:-1000}
       - GROUP_ID=${GROUP_ID:-1000}
-      - KAS_WORK_DIR=/mnt/yocto-kas
-      - KAS_BUILD_DIR=$${KAS_WORK_DIR}/build
     volumes:
       - ./:/mnt/yocto-kas
       - ${SSH_DIR:-~/.ssh}:/etc/skel/.ssh
