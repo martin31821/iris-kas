@@ -13,4 +13,4 @@ services:
       - KAS_BUILD_DIR=$${KAS_WORK_DIR}/build
     volumes:
       - ./:/mnt/yocto-kas
-      - ~/.ssh:/builder/.ssh
+      - ~/.ssh:/etc/skel/.ssh
