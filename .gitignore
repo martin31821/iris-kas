@@ -1,4 +1,5 @@
-/build/
-/poky/
-/meta-*/
-/lnxdsp-adi-meta/
+build/
+poky/
+meta-*/
+lnxdsp-adi-meta/
+.vagrant
