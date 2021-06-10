@@ -67,6 +67,9 @@ repos:
   meta-iris-base:
     url: "https://github.com/iris-GmbH/meta-iris-base.git"
     refspec: "develop"
+  meta-iris-thirdparty:
+    url: "https://github.com/iris-GmbH/meta-iris-thirdparty.git"
+    refspec: "dunfell"
 
 bblayers_conf_header:
   standard: |
