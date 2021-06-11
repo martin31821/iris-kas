@@ -15,8 +15,18 @@ It minimises build setup steps and repository management.
 
 For a detailed documentation, please visit [https://kas.readthedocs.io/en/latest/](https://kas.readthedocs.io/en/latest/)
 
-## Prerequisites 
-- either a [native KAS installation](https://kas.readthedocs.io/en/latest/userguide.html#dependencies-installation) on a [host system prepared for yocto builds](https://www.yoctoproject.org/docs/3.1/mega-manual/mega-manual.html#brief-compatible-distro) or an installed and running [docker daemon](https://docs.docker.com/engine/install/), as well as [docker-compose](https://docs.docker.com/compose/install/)
+## Prerequisites
+### Native Installation
+- [native KAS installation](https://kas.readthedocs.io/en/latest/userguide.html#dependencies-installation) on a [supported host system prepared for yocto builds](https://www.yoctoproject.org/docs/3.1/mega-manual/mega-manual.html#brief-compatible-distro)
+- as IRIS developer: SSH key (without password protection) configured for accessing our private git repositories
+
+### Docker
+- Linux, Mac or WSL in Windows (officially we only support Linux)
+- [installed and running docker daemon](https://docs.docker.com/engine/install/)
+- [installed docker-compose](https://docs.docker.com/compose/install/)
+- as IRIS developer: SSH folder containing a SSH key (without password protection) configured for accessing our private git repositories, as well as a known_host file containing our private git server
+- currently no SELinux support
+
 
 ## Example usages
 
@@ -46,5 +56,5 @@ As an IRIS customer you might want to build the base Linux image belonging to a 
 
 ### Using Docker
 
-Make sure you have Docker and docker-compose installed. Then prepend the commands from above with the following:
+Make sure your setup meets the [docker prerequisites](#prerequisites), then simply prepend the desired command with the following:
 `USER_ID=$UID docker-compose run --rm `
