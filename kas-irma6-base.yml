@@ -7,10 +7,7 @@ header:
 distro: "poky-iris"
 
 target:
-  - multiconfig:sc572-gen6
-  - multiconfig:sc573-ezkit
   - multiconfig:sc573-gen6
-  - multiconfig:sc573-gen6-4dvein
   - multiconfig:imx8mp-evk
 
 repos:
