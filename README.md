@@ -4,9 +4,11 @@
 - Jasper Orschulko <Jasper [dot] Orschulko [att] iris-sensing.com>
 - Erik Schumacher <Erik [dot] Schumacher [att] iris-sensing.com>
 
+
 ## What is KAS?
 KAS is a bitbake wrapper developed and maintained by Siemens.
 It minimises build setup steps and repository management.
+
 
 ## How does it work?
 - The file `kas-irma6-base.yml` is the main configuration file for our custom Linux distribution and describes how KAS should prepare our build environment. It is also used to generate various config files, such as yocto's `local.conf`.
@@ -32,15 +34,16 @@ For a detailed documentation, please visit [https://kas.readthedocs.io/en/latest
 
 ### As an IRIS developer
 
-#### Building the current gen6 deploy firmware for the ADI sharc using the developer specific config
+#### Building the current gen6 deploy firmware for the ADSP-SC573 using the developer specific config
 `kas shell -c "bitbake mc:sc573-gen6:irma-six-deploy" kas-irma6-base.yml:kas-irma6-pa.yml:kas-developer.yml`
 
-#### Building all the gen6 firmwares for the ADI sharc
+#### Building all the gen6 firmwares for the ADSP-SC573
 `kas shell -c "bitbake mc:sc573-gen6:irma-six-maintenance mc:sc573-gen6:irma-six-dev mc:sc573-gen6:irma-six-deploy" kas-irma6-base.yml:kas-irma6-pa.yml:kas-developer.yml`
 
 #### Building for other machine configs
 Replace the multiconfig string in your build command (e.g. `mc:sc573-gen6:irma-six-maintenance` -> `mc:imx8mp-evk:irma-six-maintenance`).
 Available multiconfigs are listed in the *target* section of the `kas-irma6-base.yml` file.
+
 
 ### As an IRIS customer
 
@@ -54,7 +57,22 @@ As an IRIS customer you might want to build the base Linux image belonging to a 
 
 `kas shell -c "bitbake mc:sc573-gen6:irma-six-base" kas-irma6-base.yml:kas-offline-build.yml`
 
+
 ### Using Docker
 
 Make sure your setup meets the [docker prerequisites](#prerequisites), then simply prepend the desired command with the following:
-`USER_ID=$UID docker-compose run --rm `
+`docker-compose run --rm `
+
+#### Environment variables understood by docker-compose
+
+Currently the following environment variables can be prepended to the `docker-compose` command:
+
+- `USER_ID` should be set to the `$id -u` value of the host user (defaults to `1000`).
+- `GROUP_ID` should be set to the `$id -g` value of the host user (defaults to `1000`).
+- `SSH_DIR` should be set to a path containing an `id_rsa` and `known_hosts` file on the host system (defaults to `~/.ssh`).
+
+For users in a single user Linux setup with default SSH settings, the default values will work just fine.
+
+##### Example with changed variables
+
+`USER_ID=$(id -u) GROUP_ID=$(id -g) SSH_DIR=/my/ssh/folder docker-compose run --rm [...]` 

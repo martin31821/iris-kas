@@ -8,9 +8,8 @@ services:
     image: ghcr.io/siemens/kas/kas:2.4
     working_dir: /mnt/yocto-kas
     environment:
-      - USER_ID
-      - KAS_WORK_DIR=/mnt/yocto-kas
-      - KAS_BUILD_DIR=$${KAS_WORK_DIR}/build
+      - USER_ID=${USER_ID:-1000}
+      - GROUP_ID=${GROUP_ID:-1000}
     volumes:
       - ./:/mnt/yocto-kas
-      - ~/.ssh:/etc/skel/.ssh
+      - ${SSH_DIR:-~/.ssh}:/etc/skel/.ssh
