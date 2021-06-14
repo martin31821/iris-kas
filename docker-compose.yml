@@ -5,7 +5,12 @@ version: '3'
 
 services:
   kas:
-    image: ghcr.io/siemens/kas/kas:2.4
+    build: .
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+      - /dev/kvm
     working_dir: /mnt/yocto-kas
     environment:
       - USER_ID=${USER_ID:-1000}
