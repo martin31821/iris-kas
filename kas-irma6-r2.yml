@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: MIT
+# Copyright (C) 2021 iris-GmbH infrared & intelligent sensors
+
+header:
+  version: 9
+
+target:
+  - multiconfig:imx8mp-evk
+
+repos:
+  # irma6 HWv2 repos
+  meta-iris-base:
+    layers:
+    meta-iris-base-hw2:
+  meta-freescale:
+    url: "https://github.com/Freescale/meta-freescale.git"
+    refspec: "dunfell"
+  meta-freescale-3rdparty:
+    url: "https://github.com/Freescale/meta-freescale-3rdparty"
+    refspec: "dunfell"
+  meta-freescale-distro:
+    url: "https://github.com/Freescale/meta-freescale-distro"
+    refspec: "dunfell"
+
+local_conf_header:
+  # this BBMASK allows us to use a single platform application KAS config
+  ignore-hw1-layer: |
+    BBMASK += "meta-iris\/meta-iris-.*hw1\/.*"

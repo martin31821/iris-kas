@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+# Copyright (C) 2021 iris-GmbH infrared & intelligent sensors
+
+header:
+  version: 9
+
+target:
+  - multiconfig:sc573-gen6
+
+repos:
+  # irma6 HWv1 repos
+  meta-iris-base:
+    layers:
+      meta-iris-base-hw1:
+
+local_conf_header:
+  # we only want to cherry-pick u-boot and kernel recipes from the adi upstream. ignore everything else
+  ignore-adi-packages: |
+    BBMASK += "meta-adi-adsp-sc5xx\/(?!(recipes-bsp\/u-boot)|(recipes-kernel\/linux)|(recipes-kernel\/linux-firmware)).+\/.+"
+
+  # this BBMASK allows us to use a single KAS config for the platform application
+  ignore-hw2-layer: |
+    BBMASK += "meta-iris\/meta-iris-.*hw2\/.*"

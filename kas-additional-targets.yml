@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2021 iris-GmbH infrared & intelligent sensors
+#
+# append this config to your kas build for additional HWv1 targets
 
 header:
   version: 9

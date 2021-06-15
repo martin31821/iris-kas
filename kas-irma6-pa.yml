@@ -9,3 +9,7 @@ repos:
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
     refspec: "develop"
+    layers:
+      meta-iris-common:
+      meta-iris-r1:
+      meta-iris-r2:

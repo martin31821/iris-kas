@@ -8,10 +8,14 @@ distro: "poky-iris"
 
 target:
   - multiconfig:qemux86-64
-  - multiconfig:sc573-gen6
-  - multiconfig:imx8mp-evk
 
 repos:
+  # iris-specific repos
+  meta-iris-base:
+    url: "https://github.com/iris-GmbH/meta-iris-base.git"
+    refspec: "develop"
+    layers:
+      meta-iris-base-common:
   
   # general repos
   poky:
@@ -42,30 +46,6 @@ repos:
     url: "https://github.com/kraj/meta-clang.git"
     refspec: "dunfell"
   
-  # irma6 HWv1 repos
-  lnxdsp-adi-meta:
-    url: "https://github.com/analogdevicesinc/lnxdsp-adi-meta.git"
-    refspec: "release/yocto-1.0.0"
-    layers:
-      meta-adi-adsp-sc5xx:
-      meta-adi-external-toolchain:
-
-  # irma6 HWv2 repos
-  meta-freescale:
-    url: "https://github.com/Freescale/meta-freescale.git"
-    refspec: "dunfell"
-  meta-freescale-3rdparty:
-    url: "https://github.com/Freescale/meta-freescale-3rdparty"
-    refspec: "dunfell"
-  meta-freescale-distro:
-    url: "https://github.com/Freescale/meta-freescale-distro"
-    refspec: "dunfell"
-
-  # iris-specific repos
-  meta-iris-base:
-    url: "https://github.com/iris-GmbH/meta-iris-base.git"
-    refspec: "develop"
-
 bblayers_conf_header:
   standard: |
     POKY_BBLAYERS_CONF_VERSION = "2"
@@ -89,10 +69,6 @@ local_conf_header:
   build_reproducibility: |
     BB_GIT_SHALLOW = "1"
     BB_GENERATE_SHALLOW_TARBALLS = "1"
-
-  # we only want to cherry-pick u-boot and kernel recipes from the adi upstream. ignore everything else
-  ignore-adi-packages: |
-    BBMASK += "meta-adi-adsp-sc5xx\/(?!(recipes-bsp\/u-boot)|(recipes-kernel\/linux)|(recipes-kernel\/linux-firmware)).+\/.+"
 
   package_ipk: |
     PACKAGE_CLASSES ?= "package_ipk"
