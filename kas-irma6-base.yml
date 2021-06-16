@@ -41,6 +41,11 @@ repos:
   meta-clang:
     url: "https://github.com/kraj/meta-clang.git"
     refspec: "dunfell"
+
+  # license compliance
+  meta-spdxscanner:
+    url: "https://git.yoctoproject.org/git/meta-spdxscanner"
+    refspec: "dunfell"
   
   # irma6 HWv1 repos
   lnxdsp-adi-meta:
@@ -82,6 +87,9 @@ local_conf_header:
 
   accept_eulas: |
     ACCEPT_FSL_EULA = "1"
+
+  license_compliance: |
+    INHERIT += "scancode-tk"
 
   cve_scanning: |
     INHERIT += "cve-check"
