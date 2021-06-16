@@ -17,6 +17,10 @@ repos:
   poky:
     url: "git://git.yoctoproject.org/poky.git"
     refspec: "dunfell"
+    patches:
+      0001-expat-fix-CVE-2013-0340:
+        repo: meta-iris-base
+        path: patches/meta-openembedded/0001-expat-fix-CVE-2013-0340.patch
     layers:
       meta:
       meta-poky:
