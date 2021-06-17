@@ -8,4 +8,4 @@ header:
 repos:
   meta-iris:
     url: "ssh://git@bitbucket.irisgmbh.local:7999/gen6/meta-iris.git"
-    refspec: "feature/asis/jenkinsLogging"
+    refspec: "feature/jaor/fix_logging_cmake"
