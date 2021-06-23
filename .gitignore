@@ -2,3 +2,7 @@
 /poky/
 /meta-*/
 /lnxdsp-adi-meta/
+licenses.tar.gz
+base-sources.tar.gz
+update_files.tar.gz
+release.tar

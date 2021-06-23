@@ -11,10 +11,10 @@ services:
     devices:
       - /dev/net/tun
       - /dev/kvm
-    working_dir: /mnt/yocto-kas
+    working_dir: ${PWD}
     environment:
       - USER_ID=${USER_ID:-1000}
       - GROUP_ID=${GROUP_ID:-1000}
     volumes:
-      - ./:/mnt/yocto-kas
+      - ${PWD}:${PWD}
       - ${SSH_DIR:-~/.ssh}:/etc/skel/.ssh
