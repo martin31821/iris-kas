@@ -1,0 +1,11 @@
+version: 0.2
+
+run-as: builder
+
+phases:
+  build:
+    on-failure: ABORT
+    commands:
+      - tar -xf ${GIT_TAG}-base-sources.tar.gz
+      - rm ${GIT_TAG}-base-sources.tar.gz
+      - kas shell -c "bitbake mc:${MULTI_CONF}:irma6-base" kas-irma6-base.yml:kas-offline-build.yml

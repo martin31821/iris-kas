@@ -1,0 +1,26 @@
+version: 0.2
+
+run-as: builder
+
+phases:
+  build:
+    on-failure: ABORT
+    commands:
+      # Generate list of targets from string
+      - export targets="$(for i in ${TARGETS}; do echo -n "mc:${i}:irma6-base "; done)"
+      # Fetch base sources for all targets
+      - kas shell --update -c "bitbake ${targets} --runonly=fetch" kas-irma6-base.yml
+      # Remove redundant git2 and tmp dirs for smaller footprint
+      - rm -rf build/dl_dir/git2/ build/tmp
+      # Create a tar.gz archive containing the complete build environment while preserving file permissions
+      - touch ${GIT_TAG}-base-sources.tar.gz
+      - tar --exclude=${GIT_TAG}-base-sources.tar.gz -czf ${GIT_TAG}-base-sources.tar.gz .
+artifacts:
+  files:
+    - "${GIT_TAG}-base-sources.tar.gz"
+  secondary-artifacts:
+    # Temporary artifact for validating source reproducibility
+    temp_base_sources:
+      files:
+        - "${GIT_TAG}-base-sources.tar.gz"
+        - "buildspecs/**/*"
