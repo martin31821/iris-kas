@@ -27,6 +27,7 @@ repos:
       meta-oe:
       meta-python:
       meta-networking:
+      meta-webserver:
   meta-ros: # provides yaml-cpp
     url: "https://github.com/ros/meta-ros.git"
     refspec: "dunfell"
@@ -64,7 +65,7 @@ repos:
   # iris-specific repos
   meta-iris-base:
     url: "https://github.com/iris-GmbH/meta-iris-base.git"
-    refspec: "develop"
+    refspec: "feature/jaor/auth"
 
 bblayers_conf_header:
   standard: |
