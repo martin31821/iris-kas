@@ -55,17 +55,30 @@ repos:
   meta-freescale:
     url: "https://github.com/Freescale/meta-freescale.git"
     refspec: "dunfell"
+    patches:
+      add-new-nxp-eulas:
+        repo: "meta-iris-base"
+        path: "layer-patches/meta-freescale/0001-meta-freescale-Add-new-NXP-EULAs.patch"
   meta-freescale-3rdparty:
     url: "https://github.com/Freescale/meta-freescale-3rdparty"
     refspec: "dunfell"
   meta-freescale-distro:
     url: "https://github.com/Freescale/meta-freescale-distro"
     refspec: "dunfell"
+  meta-imx:
+    url: "https://source.codeaurora.org/external/imx/meta-imx"
+    refspec: "hardknott-5.10.35-2.0.0"
+    patches:
+      modify-meta-ml-for-usage-in-dunfell:
+        repo: "meta-iris-base"
+        path: "layer-patches/meta-imx/0001-meta-imx-Modify-meta-ml-for-usage-in-dunfell.patch"
+    layers:
+      meta-ml:
 
   # iris-specific repos
   meta-iris-base:
     url: "https://github.com/iris-GmbH/meta-iris-base.git"
-    refspec: "develop"
+    refspec: "feature/jaor/RDPHOEN-397_integrate_nxp_meta-ml_into_base_image"
 
 bblayers_conf_header:
   standard: |
