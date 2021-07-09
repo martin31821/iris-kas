@@ -4,7 +4,7 @@
 header:
   version: 9
 
-target:
-  - multiconfig:sc572-gen6
-  - multiconfig:sc573-ezkit
-  - multiconfig:sc573-gen6-4dvein
+local_conf_header:
+  dldir_mirror: |
+    SOURCE_MIRROR_URL ?= "file://${DL_DIR}"
+    INHERIT += "own-mirrors"

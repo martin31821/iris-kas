@@ -5,7 +5,5 @@ header:
   version: 9
 
 local_conf_header:
-  offline_build: |
-    SOURCE_MIRROR_URL ?= "file://${DL_DIR}"
-    INHERIT += "own-mirrors"
-    BB_NO_NETWORK = "1"
+  sstate_mirror: |
+    SSTATE_MIRRORS = "file://.* file:///mnt/yocto_cache/sstate_cache/PATH"
