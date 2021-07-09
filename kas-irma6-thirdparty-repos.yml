@@ -1,0 +1,58 @@
+# SPDX-License-Identifier: MIT
+# Copyright (C) 2021 iris-GmbH infrared & intelligent sensors
+#
+#
+# Define thirdparty repositories used within irma6
+
+header:
+  version: 9
+
+repos:
+  # general repos
+  poky:
+    url: "git://git.yoctoproject.org/poky.git"
+    refspec: "dunfell"
+    layers:
+      meta:
+      meta-poky:
+  meta-oe:
+    url: "git://git.openembedded.org/meta-openembedded"
+    refspec: "dunfell"
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+  meta-ros: # provides yaml-cpp
+    url: "https://github.com/ros/meta-ros.git"
+    refspec: "dunfell"
+    layers:
+      meta-ros-backports-gatesgarth:
+      meta-ros-backports-hardknott:
+      meta-ros-common:
+
+  # repos relevant for testing
+  meta-java:
+    url: "https://git.yoctoproject.org/git/meta-java"
+    refspec: "dunfell"
+  meta-clang:
+    url: "https://github.com/kraj/meta-clang.git"
+    refspec: "dunfell"
+  
+  # irma6 HWv1 repos
+  lnxdsp-adi-meta:
+    url: "https://github.com/analogdevicesinc/lnxdsp-adi-meta.git"
+    refspec: "release/yocto-1.0.0"
+    layers:
+      meta-adi-adsp-sc5xx:
+      meta-adi-external-toolchain:
+
+  # irma6 HWv2 repos
+  meta-freescale:
+    url: "https://github.com/Freescale/meta-freescale.git"
+    refspec: "dunfell"
+  meta-freescale-3rdparty:
+    url: "https://github.com/Freescale/meta-freescale-3rdparty"
+    refspec: "dunfell"
+  meta-freescale-distro:
+    url: "https://github.com/Freescale/meta-freescale-distro"
+    refspec: "dunfell"
