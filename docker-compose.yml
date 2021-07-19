@@ -1,16 +1,20 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2021 iris GmbH infrared & intelligent sensors
+# Copyright (C) 2021 iris-GmbH infrared & intelligent sensors
 
 version: '3'
 
 services:
   kas:
-    image: ghcr.io/siemens/kas/kas:2.4
+    build: .
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+      - /dev/kvm
     working_dir: /mnt/yocto-kas
     environment:
-      - USER_ID
-      - KAS_WORK_DIR=/mnt/yocto-kas
-      - KAS_BUILD_DIR=$${KAS_WORK_DIR}/build
+      - USER_ID=${USER_ID:-1000}
+      - GROUP_ID=${GROUP_ID:-1000}
     volumes:
       - ./:/mnt/yocto-kas
-      - ~/.ssh:/builder/.ssh
+      - ${SSH_DIR:-~/.ssh}:/etc/skel/.ssh
