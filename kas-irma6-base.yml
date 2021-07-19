@@ -54,13 +54,13 @@ repos:
   # irma6 HWv2 repos
   meta-freescale:
     url: "https://github.com/Freescale/meta-freescale.git"
-    refspec: "dunfell"
+    refspec: "0173d3f8d0cbf7844a4d23bc3fb30144abc914bb" #dunfell
   meta-freescale-3rdparty:
     url: "https://github.com/Freescale/meta-freescale-3rdparty"
-    refspec: "dunfell"
+    refspec: "a7b96dc91bb2818d8ed8210654db10d08d4d7890" #dunfell
   meta-freescale-distro:
     url: "https://github.com/Freescale/meta-freescale-distro"
-    refspec: "dunfell"
+    refspec: "5d882cdf079b3bde0bd9869ce3ca3db411acbf3b" #dunfell
 
   # iris-specific repos
   meta-iris-base:
