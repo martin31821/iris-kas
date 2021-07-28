@@ -24,7 +24,7 @@ def generateBaseImageStages(target) {
                 sourceTypeOverride: 'S3',
                 sourceLocationOverride: "${S3_TEMP_LOCATION}/${GIT_TAG}/${BASE_SOURCES_TEMP_ARTIFACT}",
                 projectName: 'iris-devops-kas-build-codebuild',
-                envVariables: "[ { MULTI_CONF, $target }, { GIT_TAG, $GIT_TAG } ]"
+                envVariables: "[ { MULTI_CONF, $target }, { GIT_TAG, $GIT_TAG }, { HOME, /home/builder } ]"
         }
     }
 }
@@ -79,7 +79,7 @@ pipeline {
                             \"packaging\": \"ZIP\"
                         }
                     ]""",
-                    envVariables: "[{ TARGETS, $targets_string }, { GIT_TAG, $GIT_TAG }]"
+                    envVariables: "[{ TARGETS, $targets_string }, { GIT_TAG, $GIT_TAG }, { HOME, /home/builder }]"
             }
         }
 
