@@ -92,6 +92,10 @@ local_conf_header:
     BB_GIT_SHALLOW = "1"
     BB_GENERATE_SHALLOW_TARBALLS = "1"
 
+  buildhistory: |
+    INHERIT += "buildhistory"
+    BUILDHISTORY_COMMIT = "1"
+
   # we only want to cherry-pick u-boot and kernel recipes from the adi upstream. ignore everything else
   ignore-adi-packages: |
     BBMASK += "meta-adi-adsp-sc5xx\/(?!(recipes-bsp\/u-boot)|(recipes-kernel\/linux)|(recipes-kernel\/linux-firmware)).+\/.+"

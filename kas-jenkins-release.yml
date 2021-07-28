@@ -9,7 +9,4 @@ local_conf_header:
     DL_DIR = "/mnt/yocto_cache/dl_dir"
     SSTATE_DIR = "/mnt/yocto_cache/sstate_cache"
   prserv: |
-    PRSERV_HOST = "jenkinsstorage.irisgmbh.local:8585"
-  buildhistory: |
-    INHERIT += "buildhistory"
-    BUILDHISTORY_COMMIT = "1"
+    PRSERV_HOST = "prservice:8585"

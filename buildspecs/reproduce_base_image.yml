@@ -8,4 +8,4 @@ phases:
     commands:
       - tar -xf ${GIT_TAG}-base-sources.tar.gz
       - rm ${GIT_TAG}-base-sources.tar.gz
-      - kas shell -c "bitbake mc:${MULTI_CONF}:irma6-base" kas-irma6-base.yml:kas-offline-build.yml
+      - kas shell -c "bitbake mc:${MULTI_CONF}:irma6-base" kas-irma6-base.yml:kas-jenkins-release.yml:kas-offline-build.yml
