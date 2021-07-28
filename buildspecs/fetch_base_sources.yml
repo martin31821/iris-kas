@@ -8,8 +8,10 @@ phases:
     commands:
       # Generate list of targets from string
       - export targets="$(for i in ${TARGETS}; do echo -n "mc:${i}:irma6-base "; done)"
-      # Fetch base sources for all targets
-      - kas shell --update -c "bitbake ${targets} --runonly=fetch" kas-irma6-base.yml:kas-jenkins-release.yml
+      # Clean dl_dir and sstate before release build
+      - rm -rf /mnt/yocto_cache/dl_dir/* /mnt/yocto_cache/sstate_cache/*
+      # Fetch base sources for all targets, cleanup on failure
+      - kas shell --update -c "bitbake ${targets} --runonly=fetch" kas-irma6-base.yml:kas-jenkins-release.yml || { rm -rf /mnt/yocto_cache/dl_dir/* /mnt/yocto_cache/sstate_cache/*; exit 1; }
       # Remove redundant git2 and tmp dirs for smaller footprint
       - rm -rf /mnt/yocto_cache/dl_dir/git2/ build/tmp
       # Create a tar.gz archive containing the complete build environment while preserving file permissions
