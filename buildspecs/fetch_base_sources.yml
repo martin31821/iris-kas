@@ -7,7 +7,7 @@ phases:
     on-failure: ABORT
     commands:
       # change ownership of mounted EFS volumes
-      - sudo chown -R builder:builder /mnt/yocto_cache/*
+      - sudo chown -R builder:builder /mnt/yocto_cache/
       # Generate list of targets from string
       - export targets="$(for i in ${TARGETS}; do echo -n "mc:${i}:irma6-base "; done)"
       # Clean dl_dir and sstate before release build fetch
