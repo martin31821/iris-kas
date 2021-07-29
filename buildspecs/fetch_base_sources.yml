@@ -3,20 +3,31 @@ version: 0.2
 run-as: builder
 
 phases:
-  build:
+  pre_build:
     on-failure: ABORT
     commands:
+      # change ownership of mounted EFS volumes
+      - sudo chown builder:builder /mnt/yocto_cache/*
       # Generate list of targets from string
       - export targets="$(for i in ${TARGETS}; do echo -n "mc:${i}:irma6-base "; done)"
       # Clean dl_dir and sstate before release build
       - rm -rf /mnt/yocto_cache/dl_dir/* /mnt/yocto_cache/sstate_cache/*
+
+  build:
+    on-failure: ABORT
+    commands:
       # Fetch base sources for all targets, cleanup on failure
       - kas shell --update -c "bitbake ${targets} --runonly=fetch" kas-irma6-base.yml:kas-jenkins-release.yml || { rm -rf /mnt/yocto_cache/dl_dir/* /mnt/yocto_cache/sstate_cache/*; exit 1; }
+
+  post_build:
+    on-failure: ABORT
+    commands:
       # Remove redundant git2 and tmp dirs for smaller footprint
       - rm -rf /mnt/yocto_cache/dl_dir/git2/ build/tmp
       # Create a tar.gz archive containing the complete build environment while preserving file permissions
       - touch ${GIT_TAG}-base-sources.tar.gz
       - tar --exclude=${GIT_TAG}-base-sources.tar.gz -czf ${GIT_TAG}-base-sources.tar.gz .
+
 artifacts:
   files:
     - "${GIT_TAG}-base-sources.tar.gz"
