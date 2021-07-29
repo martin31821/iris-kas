@@ -5,6 +5,6 @@ header:
   version: 9
 
 local_conf_header:
-  dldir_mirror: |
+  dl_mirror: |
     SOURCE_MIRROR_URL ?= "file://${DL_DIR}"
     INHERIT += "own-mirrors"

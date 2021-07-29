@@ -4,6 +4,5 @@
 header:
   version: 9
   includes:
-    - "kas-prservice.yml"
     - "kas-dl-mirror.yml"
     - "kas-sstate-mirror.yml"

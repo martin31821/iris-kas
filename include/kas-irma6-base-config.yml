@@ -12,6 +12,7 @@ bblayers_conf_header:
     POKY_BBLAYERS_CONF_VERSION = "2"
     BBPATH = "${TOPDIR}"
     BBFILES ?= ""
+    ACCEPT_FSL_EULA = "1"
 
 local_conf_header:
   standard: |
@@ -21,14 +22,11 @@ local_conf_header:
     DL_DIR ?= "${TOPDIR}/dl_dir"
     SSTATE_DIR ?= "${TOPDIR}/sstate_dir"
 
-  accept_eulas: |
-    ACCEPT_FSL_EULA = "1"
-
   # we only want to cherry-pick u-boot and kernel recipes from the adi upstream. ignore everything else
   ignore-adi-packages: |
     BBMASK += "meta-adi-adsp-sc5xx\/(?!(recipes-bsp\/u-boot)|(recipes-kernel\/linux)|(recipes-kernel\/linux-firmware)).+\/.+"
 
-  package_ipk: |
+  package_class: |
     PACKAGE_CLASSES ?= "package_ipk"
 
   image_features: |
