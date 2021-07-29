@@ -6,4 +6,4 @@ header:
 
 local_conf_header:
   sstate_mirror: |
-    SSTATE_MIRRORS = "file://.* file:///mnt/yocto_cache/sstate_cache/PATH"
+    SSTATE_MIRRORS = "file://.* file:///mnt/yocto_cache/sstate_cache/${MULTI_CONF}/PATH"

@@ -10,14 +10,14 @@ phases:
       - sudo chown builder:builder /mnt/yocto_cache/*
       # Generate list of targets from string
       - export targets="$(for i in ${TARGETS}; do echo -n "mc:${i}:irma6-base "; done)"
-      # Clean dl_dir and sstate before release build
+      # Clean dl_dir and sstate before release build fetch
       - rm -rf /mnt/yocto_cache/dl_dir/* /mnt/yocto_cache/sstate_cache/*
 
   build:
     on-failure: ABORT
     commands:
       # Fetch base sources for all targets, cleanup on failure
-      - kas shell --update -c "bitbake ${targets} --runonly=fetch" kas-irma6-base.yml:include/kas-irma6-jenkins-release.yml || { rm -rf /mnt/yocto_cache/dl_dir/* /mnt/yocto_cache/sstate_cache/*; exit 1; }
+      - kas shell --update -c "bitbake ${targets} --runonly=fetch" kas-irma6-base.yml:include/kas-irma6-jenkins-release-fetch.yml || { rm -rf /mnt/yocto_cache/dl_dir/*; exit 1; }
 
   post_build:
     on-failure: ABORT

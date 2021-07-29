@@ -4,19 +4,15 @@
 header:
   version: 9
   includes:
-    - "kas-prservice.yml"
+    - "kas-irma6-jenkins-release-fetch.yml"
 
 local_conf_header:
   cache_locations: |
     DL_DIR = "/mnt/yocto_cache/dl_dir"
-    SSTATE_DIR = "/mnt/yocto_cache/sstate_cache"
+    SSTATE_DIR = "/mnt/yocto_cache/sstate_cache/${MULTI_CONF}"
 
   cve_scanning: |
     INHERIT += "cve-check"
-
-  build_reproducibility: |
-    BB_GIT_SHALLOW = "1"
-    BB_GENERATE_SHALLOW_TARBALLS = "1"
 
   build_history: |
     INHERIT += "buildhistory"
