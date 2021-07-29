@@ -9,4 +9,4 @@ local_conf_header:
     DL_DIR = "/mnt/yocto_cache/dl_dir"
     SSTATE_DIR = "/mnt/yocto_cache/sstate_cache"
   prserv: |
-    PRSERV_HOST = "prservice:8585"
+    PRSERV_HOST = "ip-10-5-9-73.eu-central-1.compute.internal:8585"
