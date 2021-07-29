@@ -11,8 +11,9 @@ phases:
       # extract base-sources from fetch stage
       - tar -xf ${GIT_TAG}-base-sources.tar.gz
       - rm ${GIT_TAG}-base-sources.tar.gz
+
   build:
     on-failure: ABORT
     commands:
       # build base images, cleanup on failure
-      - kas shell -c "bitbake mc:${MULTI_CONF}:irma6-base" kas-irma6-base.yml:kas-irma6-jenkins-release.yml:kas-offline-build.yml || { rm -rf /mnt/yocto_cache/dl_dir/* /mnt/yocto_cache/sstate_cache/*; exit 1; }
+      - kas shell -c "bitbake mc:${MULTI_CONF}:irma6-base" kas-irma6-base.yml:include/kas-irma6-jenkins-release.yml:include/kas-offline-build.yml || { rm -rf /mnt/yocto_cache/dl_dir/* /mnt/yocto_cache/sstate_cache/*; exit 1; }
