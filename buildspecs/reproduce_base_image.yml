@@ -16,4 +16,4 @@ phases:
     on-failure: ABORT
     commands:
       # build base images, cleanup on failure
-      - kas shell -c "bitbake mc:${MULTI_CONF}:irma6-base" kas-irma6-base.yml:include/kas-irma6-jenkins-release.yml:include/kas-offline-build.yml || { rm -rf /mnt/yocto_cache/sstate_cache/${MULTI_CONF}; exit 1; }
+      - kas shell -c "bitbake mc:${MULTI_CONF}:irma6-base" kas-irma6-base.yml:include/kas-irma6-jenkins-release.yml:include/kas-offline-build.yml || { rm -rf /mnt/yocto_cache/sstate_cache/${MULTI_CONF}/*; exit 1; }
