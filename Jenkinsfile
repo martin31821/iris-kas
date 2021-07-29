@@ -31,6 +31,9 @@ def generateBaseImageStages(target) {
 
 pipeline {
     agent any
+    options {
+        disableConcurrentBuilds()
+    }
     environment {
         // S3 for permanent artifacts
         S3_LOCATION = 'iris-devops-artifacts-693612562064'
