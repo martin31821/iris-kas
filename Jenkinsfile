@@ -67,21 +67,11 @@ pipeline {
                     sourceTypeOverride: 'S3',
                     sourceLocationOverride: "${S3_TEMP_LOCATION}/${GIT_TAG}/iris-devops-fetch-artifacts.zip",
                     artifactTypeOverride: 'S3',
-                    artifactLocationOverride: "${S3_LOCATION}",
-                    artifactPathOverride: "releases",
-                    artifactNameOverride: "${GIT_TAG}",
+                    artifactLocationOverride: "${S3_TEMP_LOCATION}",
+                    artifactPathOverride: "${GIT_TAG}",
                     artifactNamespaceOverride: 'NONE',
-                    secondaryArtifactsOverride: """[
-                        {
-                            \"type\": \"S3\",
-                            \"location\": \"${S3_TEMP_LOCATION}\",
-                            \"artifactIdentifier\": \"temp_base_sources\",
-                            \"path\": \"${GIT_TAG}\",
-                            \"namespaceType\": \"NONE\",
-                            \"name\": \"${BASE_SOURCES_TEMP_ARTIFACT}\",
-                            \"packaging\": \"ZIP\"
-                        }
-                    ]""",
+                    artifactNameOverride: "${BASE_SOURCES_TEMP_ARTIFACT}",
+                    artifactPackagingOverride: 'ZIP',
                     envVariables: "[{ TARGETS, $targets_string }, { GIT_TAG, $GIT_TAG }, { HOME, /home/builder }]"
             }
         }

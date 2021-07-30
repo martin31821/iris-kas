@@ -31,9 +31,4 @@ phases:
 artifacts:
   files:
     - "${GIT_TAG}-base-sources.tar.gz"
-  secondary-artifacts:
-    # Temporary artifact for validating source reproducibility
-    temp_base_sources:
-      files:
-        - "${GIT_TAG}-base-sources.tar.gz"
-        - "buildspecs/**/*"
+    - "buildspecs/**/*"
