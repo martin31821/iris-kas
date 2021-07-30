@@ -1,0 +1,20 @@
+version: 0.2
+
+run-as: builder
+
+phases:
+  pre_build:
+    on-failure: ABORT
+    commands:
+      # change ownership of mounted EFS volumes
+      - sudo chown -R builder:builder /mnt/yocto_cache/
+      # extract base-sources from fetch stage
+      #- tar -xf ${GIT_TAG}-base-sources.tar.gz
+      #- rm ${GIT_TAG}-base-sources.tar.gz
+
+  build:
+    on-failure: ABORT
+    commands:
+      - ls -la 
+      # build base images, cleanup on failure
+      #- kas shell -c "bitbake mc:${MULTI_CONF}:irma6-base" kas-irma6-base.yml:include/kas-irma6-jenkins-release.yml:include/kas-offline-build.yml || { rm -rf /mnt/yocto_cache/sstate_cache/${MULTI_CONF}/*; exit 1; }
