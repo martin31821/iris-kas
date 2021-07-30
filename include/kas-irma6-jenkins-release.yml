@@ -7,10 +7,6 @@ header:
     - "kas-irma6-jenkins-release-fetch.yml"
 
 local_conf_header:
-  cache_locations: |
-    DL_DIR = "/mnt/yocto_cache/dl_dir"
-    SSTATE_DIR = "/mnt/yocto_cache/sstate_cache/${MULTI_CONF}"
-
   cve_scanning: |
     INHERIT += "cve-check"
 

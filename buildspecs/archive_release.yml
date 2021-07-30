@@ -1,0 +1,15 @@
+version: 0.2
+
+run-as: builder
+
+phases:
+  build:
+    on-failure: ABORT
+    commands:
+      # change ownership of mounted EFS volumes
+      - sudo chown builder:builder /mnt/yocto_cache/dl_dir /mnt/yocto_cache/sstate_cache
+      # write new caches after successful release
+      - rsync -avh --delete --delete-excluded --exclude build/dl_dir/git2_* build/dl_dir /mnt/yocto_cache/dl_dir
+      - rsync -avh --delete --delete-excluded build/sstate_cache /mnt/yocto_cache/sstate_cache
+      # remove large dl_dir for source archive
+      - rm -rf build/dl_dir/git2
