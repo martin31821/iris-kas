@@ -24,11 +24,11 @@ phases:
     commands:
       # Remove redundant git2 and tmp dirs for smaller footprint
       - rm -rf /mnt/yocto_cache/dl_dir/git2/ build/tmp
-      # Create a tar.gz archive containing the complete build environment while preserving file permissions
-      - touch ${GIT_TAG}-base-sources.tar.gz
-      - tar --exclude=${GIT_TAG}-base-sources.tar.gz -czf ${GIT_TAG}-base-sources.tar.gz .
+      # Create a tar archive containing the complete build environment while preserving file permissions
+      - touch ${GIT_TAG}-base-sources.tar
+      - tar --exclude=${GIT_TAG}-base-sources.tar -cf ${GIT_TAG}-base-sources.tar .
 
 artifacts:
   files:
-    - "${GIT_TAG}-base-sources.tar.gz"
+    - "${GIT_TAG}-base-sources.tar"
     - "buildspecs/**/*"
