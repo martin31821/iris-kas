@@ -10,6 +10,9 @@ phases:
       - sudo chown builder:builder /mnt/yocto_cache/dl_dir /mnt/yocto_cache/sstate_cache
       # set target images
       - export images="$(for i in ${IMAGES}; do echo -n "mc:${MULTI_CONF}:${i} "; done)"
+      # extract kas artifact
+      - tar -xf kas.tar
+      - rm kas.tar
 
   build:
     on-failure: ABORT
