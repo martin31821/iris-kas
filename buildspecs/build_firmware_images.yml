@@ -7,7 +7,7 @@ phases:
     on-failure: ABORT
     commands:
       # change ownership of mounted EFS volumes
-      - sudo chown builder:builder /mnt/yocto_cache/{dl_dir,sstate_cache}
+      - sudo chown builder:builder /mnt/yocto_cache/dl_dir /mnt/yocto_cache/sstate_cache
       # extract base-sources from fetch stage
       #- tar -xf ${GIT_TAG}-base-sources.tar.gz
       #- rm ${GIT_TAG}-base-sources.tar.gz

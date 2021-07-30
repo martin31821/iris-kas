@@ -11,7 +11,7 @@ phases:
       # Clean dl_dir and sstate before release build fetch
       - sudo rm -rf /mnt/yocto_cache/dl_dir/* /mnt/yocto_cache/sstate_cache/*
       # change ownership of mounted EFS volumes
-      - sudo chown builder:builder /mnt/yocto_cache/{dl_dir,sstate_cache}
+      - sudo chown builder:builder /mnt/yocto_cache/dl_dir /mnt/yocto_cache/sstate_cache
 
   build:
     on-failure: ABORT
