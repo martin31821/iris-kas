@@ -5,7 +5,7 @@
 // Target multiconfigs for the Jenkins pipeline
 def targets = [ "sc573-gen6", "imx8mp-evk" ]
 
-// Make parsable as environment variable
+// Make targets parsable as environment variable
 def targets_string = targets.join(' ')
 
 // Generate parallel & dynamic compile steps
