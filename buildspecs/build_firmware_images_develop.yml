@@ -13,6 +13,10 @@ phases:
       # extract kas artifact
       - tar -xf kas.tar
       - rm kas.tar
+      # clone meta repos
+      - kas shell --update -c "exit" kas-irma6-base.yml
+      # checkout branches with same name, if exists
+      - for i in ${LAYERS}; do (cd ${LAYERS}; git checkout "${BRANCH_NAME}" || true); done
 
   build:
     on-failure: ABORT
