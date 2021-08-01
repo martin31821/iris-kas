@@ -3,9 +3,9 @@
 
 header:
   version: 9
-  includes:
-    - "kas-dl-mirror.yml"
 
 local_conf_header:
   offline_build: |
     BB_NO_NETWORK = "1"
+    SOURCE_MIRROR_URL ?= "file://${DL_DIR}"
+    INHERIT += "own-mirrors"
