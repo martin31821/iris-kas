@@ -59,7 +59,7 @@ pipeline {
                     }
                 }
                 stages {
-                    stage("Reproduce ${MULTI_CONF} Base Image") {
+                    stage("Reproduce Base Image") {
                         steps {
                             awsCodeBuild buildSpecFile: 'buildspecs/reproduce_base_image.yml',
                                 credentialsType: 'keys',
@@ -89,7 +89,7 @@ pipeline {
                     }
                 }
                 stages {
-                    stage("Build ${MULTI_CONF} Firmware Images") {
+                    stage("Build Firmware Images") {
                         steps {
                             awsCodeBuild buildSpecFile: 'buildspecs/build_firmware_images_release.yml',
                                 credentialsType: 'keys',
