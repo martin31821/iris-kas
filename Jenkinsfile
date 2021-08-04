@@ -93,7 +93,7 @@ pipeline {
         }
 
         // Download the base sources for copyleft compliance
-        stage("Download Base Sources") {
+        stage('Download Base Sources') {
             steps {
                 awsCodeBuild buildSpecFile: 'buildspecs/fetch_base_sources.yml',
                     projectName: 'iris-devops-kas-large-arm-codebuild',
@@ -112,21 +112,23 @@ pipeline {
                     envVariables: "[{ MULTI_CONFS, $multi_confs_string }, { GIT_TAG, $GIT_TAG }, { HOME, /home/builder }]"
             }
         }
-
-        // Validate that the base image compiles for all multiconfigs (copyleft compliance) in parallel
-        stage('Verify Base Image Reproducibility') {
-            steps {
-                script {
-                    parallel parallelBaseImageStagesMap
+        stage('Build Images') {
+            parallel {
+                // Validate that the base image compiles for all multiconfigs (copyleft compliance)
+                stage('Verify Base Image Reproducibility') {
+                    steps {
+                        script {
+                            parallel parallelBaseImageStagesMap
+                        }
+                    }
                 }
-            }
-        }
-
-        // Build the firmware releases in parallel
-        stage('Build Firmware Releases') {
-            steps {
-                script {
-                    parallel parallelReleaseImageStagesMap
+                // Build the firmware releases
+                stage('Build Firmware Releases') {
+                    steps {
+                        script {
+                            parallel parallelReleaseImageStagesMap
+                        }
+                    }
                 }
             }
         }
