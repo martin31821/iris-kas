@@ -68,19 +68,21 @@ pipeline {
                 axes {
                     axis {
                         name 'MULTI_CONF'
-                        values $multi_confs
+                        values $multi_confs_string
                     }
                 }
-                stage("Reproduce ${MULTI_CONF} Base Image") {
-                    awsCodeBuild buildSpecFile: 'buildspecs/reproduce_base_image.yml',
-                        credentialsType: 'keys',
-                        downloadArtifacts: 'false',
-                        region: 'eu-central-1',
-                        sourceControlType: 'project',
-                        sourceTypeOverride: 'S3',
-                        sourceLocationOverride: "${S3_TEMP_LOCATION}/${GIT_TAG}/${BASE_SOURCES_TEMP_ARTIFACT}",
-                        projectName: 'iris-devops-kas-large-amd-codebuild',
-                        envVariables: "[ { MULTI_CONF, $MULTI_CONF }, { GIT_TAG, $GIT_TAG }, { HOME, /home/builder } ]"
+                stages {
+                    stage("Reproduce ${MULTI_CONF} Base Image") {
+                        awsCodeBuild buildSpecFile: 'buildspecs/reproduce_base_image.yml',
+                            credentialsType: 'keys',
+                            downloadArtifacts: 'false',
+                            region: 'eu-central-1',
+                            sourceControlType: 'project',
+                            sourceTypeOverride: 'S3',
+                            sourceLocationOverride: "${S3_TEMP_LOCATION}/${GIT_TAG}/${BASE_SOURCES_TEMP_ARTIFACT}",
+                            projectName: 'iris-devops-kas-large-amd-codebuild',
+                            envVariables: "[ { MULTI_CONF, $MULTI_CONF }, { GIT_TAG, $GIT_TAG }, { HOME, /home/builder } ]"
+                    }
                 }
             }
         }
@@ -90,47 +92,31 @@ pipeline {
                 axes {
                     axis {
                         name 'MULTI_CONF'
-                        values $multi_confs
+                        values $multi_confs_string
                     }
                     axis {
                         name 'IMAGES'
-                        values $images
+                        values $images[0]
                     }
                 }
-                stage("Build ${MULTI_CONF} Firmware Images") {
-                    awsCodeBuild buildSpecFile: 'buildspecs/build_firmware_images_release.yml',
-                        credentialsType: 'keys',
-                        downloadArtifacts: 'false',
-                        region: 'eu-central-1',
-                        sourceControlType: 'project',
-                        sourceTypeOverride: 'S3',
-                        sourceLocationOverride: "${S3_TEMP_LOCATION}/${GIT_TAG}/${BASE_SOURCES_TEMP_ARTIFACT}",
-                        artifactTypeOverride: 'S3',
-                        artifactLocationOverride: "${S3_TEMP_LOCATION}",
-                        artifactPathOverride: "${GIT_TAG}",
-                        artifactNamespaceOverride: 'NONE',
-                        artifactNameOverride: "${multi_conf}-${RELEASE_TEMP_ARTIFACT}",
-                        artifactPackagingOverride: 'ZIP',
-                        projectName: 'iris-devops-kas-large-amd-codebuild',
-                        envVariables: "[ { MULTI_CONF, $MULTI_CONF }, { GIT_TAG, $GIT_TAG }, { HOME, /home/builder }, { IMAGES, $IMAGES }, { SDK_IMAGE, $sdk_image } ]"
-                }
-            }
-        }
-
-        // Validate that the base image compiles for all multiconfigs (copyleft compliance)
-        stage('Verify Base Image Reproducibility') {
-            steps {
-                script {
-                    parallel parallelBaseImageStagesMap
-                }
-            }
-        }
-
-        // Build the firmware releases
-        stage('Build Firmware Releases') {
-            steps {
-                script {
-                    parallel parallelReleaseImageStagesMap
+                stages {
+                    stage("Build ${MULTI_CONF} Firmware Images") {
+                        awsCodeBuild buildSpecFile: 'buildspecs/build_firmware_images_release.yml',
+                            credentialsType: 'keys',
+                            downloadArtifacts: 'false',
+                            region: 'eu-central-1',
+                            sourceControlType: 'project',
+                            sourceTypeOverride: 'S3',
+                            sourceLocationOverride: "${S3_TEMP_LOCATION}/${GIT_TAG}/${BASE_SOURCES_TEMP_ARTIFACT}",
+                            artifactTypeOverride: 'S3',
+                            artifactLocationOverride: "${S3_TEMP_LOCATION}",
+                            artifactPathOverride: "${GIT_TAG}",
+                            artifactNamespaceOverride: 'NONE',
+                            artifactNameOverride: "${multi_conf}-${RELEASE_TEMP_ARTIFACT}",
+                            artifactPackagingOverride: 'ZIP',
+                            projectName: 'iris-devops-kas-large-amd-codebuild',
+                            envVariables: "[ { MULTI_CONF, $MULTI_CONF }, { GIT_TAG, $GIT_TAG }, { HOME, /home/builder }, { IMAGES, $IMAGES }, { SDK_IMAGE, $sdk_image } ]"
+                    }
                 }
             }
         }
