@@ -20,6 +20,8 @@ phases:
     commands:
       # remove tmp dir
       - rm -rf build/tmp
+      # rsync dl-dir to pre-mirror location for future use
+      - sudo rsync -avh build/dl_dir/ /mnt/yocto_cache/dl_dir/
       # Create a tar archive containing the complete build environment while preserving file permissions
       - touch ${GIT_TAG}-base-sources.tar
       - tar --exclude=${GIT_TAG}-base-sources.tar -cf ${GIT_TAG}-base-sources.tar .
