@@ -5,6 +5,7 @@ header:
   version: 9
   includes:
     - "kas-prservice.yml"
+    - "kas-dl-mirror.yml"
 
 local_conf_header:
   build_reproducibility: |

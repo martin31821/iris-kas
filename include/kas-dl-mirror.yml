@@ -6,5 +6,5 @@ header:
 
 local_conf_header:
   dl_mirror: |
-    SOURCE_MIRROR_URL ?= "file:///mnt/yocto_cache/dl_dir"
+    SOURCE_MIRROR_URL = "file:///mnt/yocto_cache/dl_dir"
     INHERIT += "own-mirrors"
