@@ -1,0 +1,33 @@
+version: 0.2
+
+run-as: builder
+
+phases:
+  pre_build:
+    on-failure: ABORT
+    commands:
+      # set target images
+      - export images="$(for i in ${IMAGES}; do echo -n "mc:${MULTI_CONF}:${i} "; done)"
+      # extract base-sources from fetch stage
+      - tar -xf ${GIT_TAG}-base-sources.tar
+      - rm ${GIT_TAG}-base-sources.tar
+
+  build:
+    on-failure: ABORT
+    commands:
+      # build images
+      - kas shell -k -c "bitbake ${images}" kas-irma6-pa.yml:include/kas-irma6-jenkins-release.yml
+      # build SDK
+      - kas shell -k -c "bitbake mc:${MULTI_CONF}:${SDK_IMAGE} -c populate_sdk" kas-irma6-pa.yml:include/kas-irma6-jenkins-release.yml
+
+  post_build:
+    on-failure: ABORT
+    commands:
+      # Create a tar archive containing the complete build environment while preserving file permissions
+      - touch ${GIT_TAG}-release.tar
+      - tar --exclude=${GIT_TAG}-release.tar -cf ${GIT_TAG}-release.tar .
+
+artifacts:
+  files:
+    - "${GIT_TAG}-release.tar"
+    - "buildspecs/**/*"

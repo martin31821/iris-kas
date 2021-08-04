@@ -7,7 +7,7 @@ phases:
     on-failure: ABORT
     commands:
       # Generate list of targets from string
-      - export targets="$(for i in ${TARGETS}; do echo -n "mc:${i}:irma6-base "; done)"
+      - export targets="$(for i in ${MULTI_CONFS}; do echo -n "mc:${i}:irma6-base "; done)"
 
   build:
     on-failure: ABORT
@@ -18,7 +18,8 @@ phases:
   post_build:
     on-failure: ABORT
     commands:
-      - rm -rf build/dl_dir/git2 build/tmp
+      # remove tmp dir
+      - rm -rf build/tmp
       # Create a tar archive containing the complete build environment while preserving file permissions
       - touch ${GIT_TAG}-base-sources.tar
       - tar --exclude=${GIT_TAG}-base-sources.tar -cf ${GIT_TAG}-base-sources.tar .
