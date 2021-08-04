@@ -1,23 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Copyright (C) 2021 iris-GmbH infrared & intelligent sensors
 
-
-// target multiconfigs for the Jenkins pipeline
-def multi_confs = [ "sc573-gen6", "imx8mp-evk" ]
-
-// target images for the Jenkins pipeline
-def images = [ "irma6-deploy irma6-maintenance irma6-dev" ]
-
-// The image used for populating the SDK
-def sdk_image = "irma6-maintenance" 
-
-// Make multi_confs parsable as environment variable
-def multi_confs_string = multi_confs.join(' ')
-
-// Make multi_confs parsable for axis values
-def multi_confs_matrix = "'" + multi_confs.join("', ") + "'"
-
-
 pipeline {
     agent any
     options {
@@ -28,6 +11,7 @@ pipeline {
         S3_LOCATION = 'iris-devops-artifacts-693612562064'
         // S3 with auto-expiration enabled
         S3_TEMP_LOCATION = 'iris-devops-tempartifacts-693612562064'
+        SDK_IMAGE = 'irma6-maintenance'
     }
     stages {
         stage('Preparation Stage') {
@@ -62,7 +46,7 @@ pipeline {
                     artifactNamespaceOverride: 'NONE',
                     artifactNameOverride: "${BASE_SOURCES_TEMP_ARTIFACT}",
                     artifactPackagingOverride: 'ZIP',
-                    envVariables: "[{ MULTI_CONFS, $multi_confs_string }, { GIT_TAG, $GIT_TAG }, { HOME, /home/builder }]"
+                    envVariables: "[{ MULTI_CONFS, 'sc573-gen6 imx8mp-evk' }, { GIT_TAG, $GIT_TAG }, { HOME, /home/builder }]"
             }
         }
 
@@ -71,7 +55,7 @@ pipeline {
                 axes {
                     axis {
                         name 'MULTI_CONF'
-                        values $multi_confs_matrix
+                        values 'sc573-gen6', 'imx8mp-evk'
                     }
                 }
                 stages {
@@ -97,11 +81,11 @@ pipeline {
                 axes {
                     axis {
                         name 'MULTI_CONF'
-                        values $multi_confs_matrix
+                        values 'sc573-gen6', 'imx8mp-evk'
                     }
                     axis {
                         name 'IMAGES'
-                        values $images[0]
+                        values 'irma6-deploy irma6-maintenance irma6-dev'
                     }
                 }
                 stages {
