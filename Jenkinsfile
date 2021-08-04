@@ -112,23 +112,21 @@ pipeline {
                     envVariables: "[{ MULTI_CONFS, $multi_confs_string }, { GIT_TAG, $GIT_TAG }, { HOME, /home/builder }]"
             }
         }
-        stage('Build Images') {
-            parallel {
-                // Validate that the base image compiles for all multiconfigs (copyleft compliance)
-                stage('Verify Base Image Reproducibility') {
-                    steps {
-                        script {
-                            parallel parallelBaseImageStagesMap
-                        }
-                    }
+
+        // Validate that the base image compiles for all multiconfigs (copyleft compliance)
+        stage('Verify Base Image Reproducibility') {
+            steps {
+                script {
+                    parallel parallelBaseImageStagesMap
                 }
-                // Build the firmware releases
-                stage('Build Firmware Releases') {
-                    steps {
-                        script {
-                            parallel parallelReleaseImageStagesMap
-                        }
-                    }
+            }
+        }
+
+        // Build the firmware releases
+        stage('Build Firmware Releases') {
+            steps {
+                script {
+                    parallel parallelReleaseImageStagesMap
                 }
             }
         }
