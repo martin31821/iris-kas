@@ -18,10 +18,10 @@ phases:
   post_build:
     on-failure: ABORT
     commands:
-      # replace softlinks with copies for archiving purposes
+      # replace softlinks with copies for packaging purposes
       - for f in $(find build/dl_dir -type l); do cp --remove-destination $(readlink $f) $f; done;
-      # rsync dl-dir to pre-mirror location for future use. Exclude shallow git archives
-      - sudo rsync -avh --exclude=build/dl_dir/git2_* build/dl_dir/ /mnt/yocto_cache/dl_dir/
+      # rsync dl-dir to pre-mirror location for future use
+      - sudo rsync -avh build/dl_dir/ /mnt/yocto_cache/dl_dir/
       # remove unnecessary files for archiving
       - rm -rf build/tmp build/dl_dir/git2/
       # Create a tar archive containing the complete build environment while preserving file permissions
