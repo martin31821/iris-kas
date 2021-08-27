@@ -12,9 +12,7 @@ target:
   - multiconfig:imx8mp-evk
 
 repos:
-  # this repo
-  this:
-
+  
   # general repos
   poky:
     url: "git://git.yoctoproject.org/poky.git"
