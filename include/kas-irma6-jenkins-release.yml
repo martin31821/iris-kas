@@ -3,13 +3,14 @@
 
 header:
   version: 9
+  includes:
+    - "kas-irma6-jenkins-release-fetch.yml"
+    - "kas-irma6-jenkins-populate-caches.yml"
 
 local_conf_header:
-  cache_locations: |
-    DL_DIR = "/mnt/yocto_cache/dl_dir"
-    SSTATE_DIR = "/mnt/yocto_cache/sstate_cache"
-  prserv: |
-    PRSERV_HOST = "jenkinsstorage.irisgmbh.local:8585"
-  buildhistory: |
+  cve_scanning: |
+    INHERIT += "cve-check"
+
+  build_history: |
     INHERIT += "buildhistory"
     BUILDHISTORY_COMMIT = "1"
