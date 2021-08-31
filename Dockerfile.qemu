@@ -1,4 +1,4 @@
-FROM ghcr.io/siemens/kas/kas:2.5
+FROM ghcr.io/siemens/kas/kas:next
 
 RUN set -ex \
     # Add buster-backports to repos
