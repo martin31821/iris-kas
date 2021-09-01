@@ -5,7 +5,7 @@ header:
   version: 9
   includes:
     - "kas-irma6-jenkins-release-fetch.yml"
-    - "kas-irma6-jenkins-populate-caches.yml"
+    - "kas-irma6-jenkins-populate-caches-release.yml"
 
 local_conf_header:
   cve_scanning: |

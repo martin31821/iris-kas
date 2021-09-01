@@ -16,11 +16,12 @@ phases:
       # clone layer repos and try to checkout the current branch name in all meta layers
       # populate sstate on builds of iris-kas develop branches
       - "if [ \"${JOB_NAME}\" = \"iris-kas-develop\" ] && [ \"$(basename ${GIT_BRANCH})\" = \"develop\" ]; then echo \"Info: Populating caches...\" && export POPULATE_CACHES=\":include/kas-irma6-jenkins-populate-caches.yml\"; fi"
-      - kas for-all-repos --update kas-irma6-pa.yml:include/kas-irma6-jenkins-develop.yml${POPULATE_CACHES} "git checkout ${GIT_BRANCH} 2> /dev/null || true"
+      - kas checkout --update kas-irma6-pa.yml:include/kas-irma6-${MULTI_CONF}.yml:include/kas-irma6-jenkins-develop.yml${POPULATE_CACHES}
+      - "if [ \"$(basename ${GIT_BRANCH})\" != \"develop\" ] && [ \"$(basename ${GIT_BRANCH})\" != \"master\" ]; then kas for-all-repos -k --update kas-irma6-pa.yml \"git checkout ${GIT_BRANCH} 2> /dev/null || true\"; fi"
 
   build:
     on-failure: ABORT
     commands:
       # build artifacts
-      - kas shell -k -c "bitbake ${images}" kas-irma6-pa.yml:include/kas-irma6-${MULTI_CONF}.yml:include/kas-irma6-jenkins-develop.yml${POPULATE_CACHES}
-      - kas shell -k -c "bitbake mc:${MULTI_CONF}:${SDK_IMAGE} -c populate_sdk" kas-irma6-pa.yml:include/kas-irma6-${MULTI_CONF}.yml:include/kas-irma6-jenkins-develop.yml${POPULATE_CACHES}
+      - kas shell -k -c "bitbake ${images}" kas-irma6-pa.yml
+      - kas shell -k -c "bitbake mc:${MULTI_CONF}:${SDK_IMAGE} -c populate_sdk" kas-irma6-pa.yml
