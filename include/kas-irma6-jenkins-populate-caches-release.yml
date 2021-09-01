@@ -7,4 +7,4 @@ header:
 local_conf_header:
   cache_dirs: |
     DL_DIR = "/mnt/yocto_cache/dl_dir"
-    SSTATE_DIR = "/mnt/yocto_cache/sstate_cache"
+    SSTATE_DIR = "/mnt/yocto_cache/sstate_release_cache"
