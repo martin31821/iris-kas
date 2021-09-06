@@ -13,11 +13,11 @@ phases:
       - sudo chown builder:builder /mnt/yocto_cache/dl_dir /mnt/yocto_cache/sstate_cache
       # set target images
       - export images="$(for i in ${IMAGES}; do echo -n "mc:${MULTI_CONF}:${i} "; done)"
+      # populate sstate on daily builds of iris-kas-develop
+      - "if [ \"${JOB_NAME}\" = \"iris-kas-develop\" ]; then echo \"Info: Populating caches...\" && export POPULATE_CACHES=\":include/kas-irma6-jenkins-populate-caches.yml\"; fi"
       # clone layer repos and try to checkout the current branch name in all meta layers
-      # populate sstate on builds of iris-kas develop branches
-      - "if [ \"${JOB_NAME}\" = \"iris-kas-develop\" ] && [ \"$(basename ${GIT_BRANCH})\" = \"develop\" ]; then echo \"Info: Populating caches...\" && export POPULATE_CACHES=\":include/kas-irma6-jenkins-populate-caches.yml\"; fi"
       - kas checkout --update kas-irma6-pa.yml:include/kas-irma6-${MULTI_CONF}.yml:include/kas-irma6-jenkins-develop.yml${POPULATE_CACHES}
-      - "if [ \"$(basename ${GIT_BRANCH})\" != \"develop\" ] && [ \"$(basename ${GIT_BRANCH})\" != \"master\" ]; then kas for-all-repos -k kas-irma6-pa.yml \"git checkout ${GIT_BRANCH} 2> /dev/null || true\"; fi"
+      - "if [ \"$(basename ${GIT_BRANCH})\" != \"develop\" ] && [ \"$(basename ${GIT_BRANCH})\" != \"master\" ]; then kas for-all-repos kas-irma6-pa.yml:include/kas-irma6-${MULTI_CONF}.yml:include/kas-irma6-jenkins-develop.yml${POPULATE_CACHES} \"git checkout ${GIT_BRANCH} 2> /dev/null || true\"; fi"
 
   build:
     on-failure: ABORT
